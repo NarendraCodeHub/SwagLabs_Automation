@@ -6,8 +6,8 @@
       <class name="com.swaglabs.testcases.Testcase">
         <methods>
           <include name="setup"/>
-          <include name="tearDown"/>
           <include name="testcheck"/>
+          <include name="tearDown"/>
         </methods>
       </class> <!-- com.swaglabs.testcases.Testcase -->
     </classes>
