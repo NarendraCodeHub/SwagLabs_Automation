@@ -2,15 +2,23 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-08-15T01:27:16 IST" name="Default suite" finished-at="2024-08-15T01:27:16 IST" duration-ms="91">
+  <suite started-at="2024-08-15T17:17:56 IST" name="Default suite" finished-at="2024-08-15T17:18:06 IST" duration-ms="9143">
     <groups>
     </groups>
-    <test started-at="2024-08-15T01:27:16 IST" name="Default test" finished-at="2024-08-15T01:27:16 IST" duration-ms="91">
+    <test started-at="2024-08-15T17:17:56 IST" name="Default test" finished-at="2024-08-15T17:18:06 IST" duration-ms="9143">
       <class name="com.swaglabs.testcases.Testcase">
-        <test-method signature="testcheck()[pri:0, instance:com.swaglabs.testcases.Testcase@33065d67]" started-at="2024-08-15T01:27:16 IST" name="testcheck" finished-at="2024-08-15T01:27:16 IST" duration-ms="16" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.swaglabs.testcases.Testcase@76494737]" started-at="2024-08-15T17:17:56 IST" name="setup" finished-at="2024-08-15T17:18:02 IST" duration-ms="5772" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testcheck()[pri:0, instance:com.swaglabs.testcases.Testcase@76494737]" started-at="2024-08-15T17:18:02 IST" name="testcheck" finished-at="2024-08-15T17:18:04 IST" duration-ms="2023" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testcheck -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.swaglabs.testcases.Testcase@76494737]" started-at="2024-08-15T17:18:04 IST" name="tearDown" finished-at="2024-08-15T17:18:06 IST" duration-ms="1267" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
       </class> <!-- com.swaglabs.testcases.Testcase -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

@@ -14,14 +14,29 @@ public class BaseTest {
    */
 	public WebDriver driver;
 	public ConfigDataProvider config = new ConfigDataProvider();
-	
-	@BeforeClass
-	public void setup() {
-		driver = BrowserFactory.startApplication(driver, config.getBrowser(), config.getStagingUrl());
-	}
-	
-	@AfterClass
-	public void tearDown() {
-		BrowserFactory.quitBrowser(driver);
-	}
+		
+	  @BeforeClass
+	  public void setup() {
+	      String browser = config.getBrowser();
+	      String url = config.getStagingUrl();
+	      
+	      // Debugging Logs
+	      System.out.println("Browser: " + browser);
+	      System.out.println("URL: " + url);
+	      
+	      driver = BrowserFactory.startApplication(driver, browser, url);
+	      
+	      if (driver != null) {
+	          System.out.println("Driver initialized successfully.");
+	      } else {
+	          System.out.println("Driver initialization failed.");
+	      }
+	  }
+		
+	  @AfterClass
+	  public void tearDown() {
+	      if (driver != null) {
+	          BrowserFactory.quitBrowser(driver);
+	      }
+	  }
 }
