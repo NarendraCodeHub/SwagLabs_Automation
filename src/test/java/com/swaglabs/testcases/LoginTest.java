@@ -3,6 +3,7 @@ package com.swaglabs.testcases;
 import org.testng.annotations.Test;
 
 import com.swaglabs.pages.BaseTest;
+import com.swaglabs.pages.HomePage;
 import com.swaglabs.pages.LoginPage;
 import com.swaglabs.utility.TestDataProvider;
 
@@ -19,12 +20,34 @@ public class LoginTest extends BaseTest {
         loginPage.enterUsername(username);
         loginPage.enterPassword(password);
         loginPage.clickLogin();
-
-        // Validate login success or failure
-        if(username.equals("standard_user")) {
-            Assert.assertTrue(loginPage.isLoginSuccessful(), "Login failed for standard_user");
-        } else {
-            Assert.assertTrue(loginPage.isLoginUnsuccessful(), "Login should have failed for " + username);
+        
+        
+     // Verify if the login is successful or not based on the Username
+        boolean isLoginSuccessful = loginPage.isLoginSuccessful();
+        
+        switch (username) {
+            case "standard_user":
+            case "problem_user":
+            case "performance_glitch_user":
+            case "visual_user":
+                // These users should be able to log in successfully
+                Assert.assertTrue(isLoginSuccessful, "Login failed for user: " + username);
+                
+                // If login is successful, perform logout
+                if (isLoginSuccessful) {
+                    HomePage homePage = new HomePage(driver);
+                    homePage.logout();
+                }
+                break;
+                
+            case "locked_out_user":
+            case "error_user":
+                // These users should not be able to log in
+                Assert.assertFalse(isLoginSuccessful, "Login was successful but shouldn't be for user: " + username);
+                break;
+                
+            default:
+                Assert.fail("Unknown username: " + username);
         }
     }
 }

@@ -19,7 +19,7 @@ public class LoginPage{
 	@FindBy(xpath = "//h3[.='Epic sadface: Username and password do not match any user in this service']") 
     WebElement errorMessage;
 
-    @FindBy(xpath = "//div[.='Swag Labs' and @class='app_logo' ]") //successful login
+    @FindBy(xpath = "//div[.='Swag Labs' and @class='app_logo']") //successful login
     WebElement inventoryList;
 
 	
