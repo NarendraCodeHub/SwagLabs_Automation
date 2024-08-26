@@ -29,6 +29,36 @@ public class HomePage {
 	@FindBy(xpath ="//select")
 	private WebElement filterOption;
 	
+	@FindBy(xpath = "//div[.='Sauce Labs Backpack']")
+	private WebElement item_Backpack;
+	
+	@FindBy(xpath = "//div[.='Sauce Labs Bike Light']")
+	private WebElement item_BikeLight;
+	
+	@FindBy(xpath = "//div[.='Sauce Labs Bolt T-Shirt']")
+	private WebElement item_BoltTShirt;
+	
+	@FindBy(xpath = "//div[.='Sauce Labs Fleece Jacket']")
+	private WebElement item_FleeceJacket;
+	
+	@FindBy(xpath = "//div[.='Sauce Labs Onesie']")
+	private WebElement item_Onesie;
+	
+	@FindBy(xpath = "//div[.='Test.allTheThings() T-Shirt (Red)']")
+	private WebElement item_TShirt_Red;
+	
+	@FindBy(className = "shopping_cart_link")
+	private WebElement cart;
+	
+	@FindBy(xpath = "//a[.='Twitter']")
+	private WebElement socialTwitter;
+	
+	@FindBy(xpath = "//a[.='Facebook']")
+	private WebElement socialFacebook;
+	
+	@FindBy(xpath = "//a[.='LinkedIn']")
+	private WebElement socialLinkedIn;
+	
 	public  HomePage(WebDriver d)
 	{
 		PageFactory.initElements(d, this);
@@ -88,6 +118,46 @@ public class HomePage {
         }
     }
 
-	
-	
+    // All product 
+    public void clickitem_Backpack() {
+		item_Backpack.click();
+	}
+    
+    public void clickitem_BikeLight() {
+    	item_BikeLight.click();
+	}
+    
+    public void clickitem_BoltTShirt() {
+    	item_BoltTShirt.click();
+	}
+    
+    public void clickitem_FleeceJacket() {
+    	item_FleeceJacket.click();
+	}
+    
+    public void clickitem_Onesie() {
+    	item_Onesie.click();
+	}
+    
+    public void clickitem_TShirt_Red() {
+    	item_TShirt_Red.click();
+	}
+    
+    //Cart 
+    public void clickCart() {
+		cart.click();
+	}
+    
+    //Social Link 
+    public void clicksocialTwitter() {
+    	socialTwitter.click();
+	}
+    
+    public void clicksocialFacebook() {
+    	socialFacebook.click();
+	}
+    
+    public void clicksocialLinkedIn() {
+    	socialLinkedIn.click();
+	}
 }
