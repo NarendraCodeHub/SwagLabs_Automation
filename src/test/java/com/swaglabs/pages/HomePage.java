@@ -59,6 +59,15 @@ public class HomePage {
 	@FindBy(xpath = "//a[.='LinkedIn']")
 	private WebElement socialLinkedIn;
 	
+	@FindBy(xpath = "//button[.='Add to cart']")
+	private WebElement addtoCartButton;
+	
+	@FindBy(id="back-to-products")
+	private WebElement backtoProductButton;
+	
+	@FindBy(id="remove")
+	private WebElement removeButton;
+	
 	public  HomePage(WebDriver d)
 	{
 		PageFactory.initElements(d, this);
@@ -159,5 +168,18 @@ public class HomePage {
     
     public void clicksocialLinkedIn() {
     	socialLinkedIn.click();
+	}
+    
+    //Each Product
+    public void clickaddtoCartButton() {
+    	addtoCartButton.click();
+	}
+    
+    public void clickbacktoProductButton() {
+    	backtoProductButton.click();
+	}
+    
+    public void clickremoveButton() {
+    	removeButton.click();
 	}
 }
