@@ -44,7 +44,14 @@
     	    <version>7.10.0</version>
     	    <scope>test</scope>
 	    </dependency>
-
+	    
+	    <!-- Faker Java -->
+	    <dependency> 
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>1.0.2</version> 
+		</dependency> 
+		
   </dependencies>
   
   
