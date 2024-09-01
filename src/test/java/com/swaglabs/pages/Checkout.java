@@ -2,8 +2,10 @@ package com.swaglabs.pages;
 
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class Checkout {
 
@@ -71,5 +73,92 @@ public class Checkout {
 	
 	@FindBy(id = "finish")
 	private WebElement finishButton;
+	
+	//Checkout: Complete!
 
+	@FindBy(xpath = "//span[.='Checkout: Complete!']")
+	private WebElement titlecheckoutComplete;
+	
+	@FindBy(xpath = "//h2[.='Thank you for your order!']")
+	private WebElement orderCompletemsg;
+	
+	@FindBy(id = "back-to-products")
+	private WebElement backHomeButton;
+	
+	
+	public Checkout(WebDriver d) {
+		PageFactory.initElements(d, this);
+	}
+	
+	//Checkout: Page
+
+	public void enterfirstName(String fn) {
+		firstName.sendKeys(fn);
+	}
+	
+	public void enterlastName(String ln) {
+		lastName.sendKeys(ln);
+	}
+	
+	public void enterpostalCode(String zipcode) {
+		postalCode.sendKeys(zipcode);
+	}
+	
+	public void clickcancelButton() {
+		cancelButton.click();
+	}
+	
+	public void clickcontinueButton() {
+		continueButton.click();
+	}
+	
+	public void displayerrorMessageFirstname() {
+		errorMessageFirstname.isDisplayed();
+	}
+	
+	public void displayerrorMessageLastname() {
+		errorMessageLastname.isDisplayed();
+	}
+	
+	public void displayerrorMessagePostalcode() {
+		errorMessagePostalcode.isDisplayed();
+	}
+	
+	//Checkout: Overview
+	public boolean isTitleCheckoutOverviewDisplayed() {
+        return titleCheckoutOverview.isDisplayed();
+	}
+	
+	public String getcartQuantity() {
+		return cartQuantity.getText();
+	}
+	
+	public void getcheckoutItemNames() {
+		checkoutItemNames.iterator().toString();
+	}
+	
+	public String getitemPrice() {
+		return itemPrice.getText();
+	}
+	
+	public String getPaymentInformation() {
+		return PaymentInformation.getText();
+	}
+	
+	public String getPaymentInformationValue() {
+		return PaymentInformationValue.getText();
+	}
+	
+	public String getShippingInformation() {
+		return ShippingInformation.getText();
+	}
+	
+	public String getShippingInformationValue() {
+		return ShippingInformationValue.getText();
+	}
+	
+	public String getitemSubtotal() {
+		return itemSubtotal.getText();
+	}
+	
 }
