@@ -1,5 +1,6 @@
 package com.swaglabs.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -90,7 +91,7 @@ public class Checkout {
 		PageFactory.initElements(d, this);
 	}
 	
-	//Checkout: Page
+	//Checkout: Page Method
 
 	public void enterfirstName(String fn) {
 		firstName.sendKeys(fn);
@@ -112,19 +113,20 @@ public class Checkout {
 		continueButton.click();
 	}
 	
-	public void displayerrorMessageFirstname() {
-		errorMessageFirstname.isDisplayed();
+	public boolean isErrorMessageFirstnameDisplayed() {
+		return errorMessageFirstname.isDisplayed();
 	}
 	
-	public void displayerrorMessageLastname() {
-		errorMessageLastname.isDisplayed();
+	public boolean isErrorMessageLastnameDisplayed() {
+		return errorMessageLastname.isDisplayed();
 	}
 	
-	public void displayerrorMessagePostalcode() {
-		errorMessagePostalcode.isDisplayed();
+	public boolean isErrorMessagePostalcodeDisplayed() {
+		return errorMessagePostalcode.isDisplayed();
 	}
 	
-	//Checkout: Overview
+	//Checkout: Overview Method
+	
 	public boolean isTitleCheckoutOverviewDisplayed() {
         return titleCheckoutOverview.isDisplayed();
 	}
@@ -133,8 +135,12 @@ public class Checkout {
 		return cartQuantity.getText();
 	}
 	
-	public void getcheckoutItemNames() {
-		checkoutItemNames.iterator().toString();
+	public List<String> getCheckoutItemNames() {
+	    List<String> itemNames = new ArrayList<>();
+	    for (WebElement item : checkoutItemNames) {
+	        itemNames.add(item.getText());
+	    }
+	    return itemNames;
 	}
 	
 	public String getitemPrice() {
@@ -161,4 +167,33 @@ public class Checkout {
 		return itemSubtotal.getText();
 	}
 	
+	public String getTax() {
+		return Tax.getText();
+	}
+	
+	public String getTotal() {
+		return Total.getText();
+	}
+	
+	public void clickcancelCheckoutButton() {
+		cancelCheckoutButton.click();
+	}
+	
+	public void clickfinishButton() {
+		finishButton.click();
+	}
+	
+	//Checkout: Complete! Method
+	
+	public boolean isTitlecheckoutComplete() {
+        return titlecheckoutComplete.isDisplayed();
+	}
+	
+	public boolean isDisplayorderCompletemsg() {
+		return orderCompletemsg.isDisplayed();
+	}
+	
+	public void clickbackHomeButton() {
+		backHomeButton.click();
+	}
 }
