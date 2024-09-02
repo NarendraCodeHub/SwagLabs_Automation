@@ -128,29 +128,31 @@ public class HomePage {
     }
 
     // All product 
-    public void clickitem_Backpack() {
-		item_Backpack.click();
-	}
+    public void clickProduct(String productName) {
+        switch (productName.toLowerCase()) {
+            case "sauce labs backpack":
+                item_Backpack.click();
+                break;
+            case "sauce labs bike light":
+                item_BikeLight.click();
+                break;
+            case "Sauce Labs Bolt T-Shirt":
+            	item_BoltTShirt.click();
+            	break;
+            case "Sauce Labs Fleece Jacket":
+            	item_FleeceJacket.click();
+            	break;
+            case "Sauce Labs Onesie":
+            	item_Onesie.click();
+            	break;
+            case "Test.allTheThings() T-Shirt (Red)":
+            	item_TShirt_Red.click();
+            	break;
+            	default:
+                System.out.println("Invalid product name");
+        }
+    }
     
-    public void clickitem_BikeLight() {
-    	item_BikeLight.click();
-	}
-    
-    public void clickitem_BoltTShirt() {
-    	item_BoltTShirt.click();
-	}
-    
-    public void clickitem_FleeceJacket() {
-    	item_FleeceJacket.click();
-	}
-    
-    public void clickitem_Onesie() {
-    	item_Onesie.click();
-	}
-    
-    public void clickitem_TShirt_Red() {
-    	item_TShirt_Red.click();
-	}
     
     //Cart 
     public void clickCart() {
@@ -158,28 +160,28 @@ public class HomePage {
 	}
     
     //Social Link 
-    public void clicksocialTwitter() {
+    public void clickSocialTwitter() {
     	socialTwitter.click();
 	}
     
-    public void clicksocialFacebook() {
+    public void clickSocialFacebook() {
     	socialFacebook.click();
 	}
     
-    public void clicksocialLinkedIn() {
+    public void clickSocialLinkedIn() {
     	socialLinkedIn.click();
 	}
     
     //Each Product
-    public void clickaddtoCartButton() {
+    public void clickAddToCartButton() {
     	addtoCartButton.click();
 	}
     
-    public void clickbacktoProductButton() {
+    public void clickBackToProductButton() {
     	backtoProductButton.click();
 	}
     
-    public void clickremoveButton() {
+    public void clickRemoveButton() {
     	removeButton.click();
 	}
 }
