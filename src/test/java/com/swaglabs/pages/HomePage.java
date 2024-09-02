@@ -5,8 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public class HomePage {
+	
+    private static final Logger logger = LogManager.getLogger(HomePage.class);
 	
 	@FindBy(xpath = "//button[@id='react-burger-menu-btn']")
 	private WebElement menuButton;
@@ -74,9 +79,14 @@ public class HomePage {
 	}
 	
 	//Method to Click All Item
-	public void clickAllItem()
-	{
-		AllItem.click();
+	public void clickAllItem() {
+	    try {
+	        AllItem.click();
+	        logger.info("Clicked on 'All Items' successfully.");
+	    } catch (Exception e) {
+	        logger.error("Failed to click on 'All Items'. Exception: " + e.getMessage());
+	        // taking a screenshot 
+	    }
 	}
 	
 	//Method to Click About 
@@ -85,9 +95,14 @@ public class HomePage {
 	}
 	
 	//Method to User Logout 
-	public void logout() {
-		menuButton.click();
-		LogoutButton.click();
+	public void clickLogout() {
+	    try {
+	        menuButton.click();
+	        LogoutButton.click();
+	        logger.info("User logged out successfully.");
+	    } catch (Exception e) {
+	        logger.error("Failed to log out. Exception: " + e.getMessage());
+	    }
 	}
 	
 	//Method to Click Reset App State 
@@ -106,26 +121,35 @@ public class HomePage {
 	}
 
     // Method to choose filter option using switch-case
-    public void chooseFilterOption(String filterType) {
-        Select filterDropdown = new Select(filterOption);
-        
-        switch (filterType.toLowerCase()) {
-            case "name (a to z)":
-                filterDropdown.selectByVisibleText("Name (A to Z)");
-                break;
-            case "name (z to a)":
-                filterDropdown.selectByVisibleText("Name (Z to A)");
-                break;
-            case "price (low to high)":
-                filterDropdown.selectByVisibleText("Price (low to high)");
-                break;
-            case "price (high to low)":
-                filterDropdown.selectByVisibleText("Price (high to low)");
-                break;
-            default:
-                System.out.println("Invalid filter option");
-        }
-    }
+	public void chooseFilterOption(String filterType) {
+	    try {
+	        Select filterDropdown = new Select(filterOption);
+	        
+	        switch (filterType.toLowerCase()) {
+	            case "name (a to z)":
+	                filterDropdown.selectByVisibleText("Name (A to Z)");
+	                logger.info("Filter applied: Name (A to Z)");
+	                break;
+	            case "name (z to a)":
+	                filterDropdown.selectByVisibleText("Name (Z to A)");
+	                logger.info("Filter applied: Name (Z to A)");
+	                break;
+	            case "price (low to high)":
+	                filterDropdown.selectByVisibleText("Price (low to high)");
+	                logger.info("Filter applied: Price (low to high)");
+	                break;
+	            case "price (high to low)":
+	                filterDropdown.selectByVisibleText("Price (high to low)");
+	                logger.info("Filter applied: Price (high to low)");
+	                break;
+	            default:
+	                logger.warn("Invalid filter option provided: " + filterType);
+	        }
+	    } catch (Exception e) {
+	        logger.error("Failed to apply filter. Exception: " + e.getMessage());
+	    }
+	}
+
 
     // All product 
     public void clickProduct(String productName) {
