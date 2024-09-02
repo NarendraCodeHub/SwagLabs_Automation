@@ -4,8 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.NoSuchElementException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class LoginPage{
+	
+    private static final Logger logger = LoggerFactory.getLogger(LoginPage.class);
 	
 	@FindBy(xpath = "//input[@id='user-name']")
 	private WebElement username;
@@ -43,10 +49,11 @@ public class LoginPage{
 		loginButton.click();
 	}
 
-	public boolean isLoginSuccessful() {
+    public boolean isLoginSuccessful() {
         try {
             return inventoryList.isDisplayed();
-        } catch (Exception e) {
+        } catch (NoSuchElementException e) {
+            logger.error("Login was not successful, inventory list not found.", e);
             return false;
         }
     }
@@ -54,7 +61,8 @@ public class LoginPage{
     public boolean isLoginUnsuccessful() {
         try {
             return errorMessage.isDisplayed();
-        } catch (Exception e) {
+        } catch (NoSuchElementException e) {
+            logger.error("Login error message not found.", e);
             return false;
         }
     }
