@@ -20,15 +20,15 @@ public class CartPage {
 		PageFactory.initElements(d, this);
 	}
 	
-	public void clickcontinueShoppingButton() {
+	public void clickContinueShoppingButton() {
 		continueShoppingButton.click();
 	}
 	
-	public void clickcheckoutButton() {
+	public void clickCheckoutButton() {
 		checkoutButton.click();
 	}
 	
-	public void clickremoveButton() {
+	public void clickRemoveButton() {
 		removeButton.click();
 	}
 
