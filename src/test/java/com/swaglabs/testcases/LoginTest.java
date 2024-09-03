@@ -36,7 +36,7 @@ public class LoginTest extends BaseTest {
                 // If login is successful, perform logout
                 if (isLoginSuccessful) {
                     HomePage homePage = new HomePage(driver);
-                    homePage.logout();
+                    homePage.clickLogout();
                 }
                 break;
                 
