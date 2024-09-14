@@ -13,6 +13,9 @@ public class HomePage {
 	
     private static final Logger logger = LogManager.getLogger(HomePage.class);
 	
+    @FindBy(xpath = "//div[.='Swag Labs' and @class='app_logo']")
+    private WebElement titleHomePage;
+    
 	@FindBy(xpath = "//button[@id='react-burger-menu-btn']")
 	private WebElement menuButton;
 	
@@ -76,6 +79,14 @@ public class HomePage {
 	public  HomePage(WebDriver d)
 	{
 		PageFactory.initElements(d, this);
+	}
+	
+	public boolean isTitleHomePageDisplayed() {
+		return titleHomePage.isDisplayed();
+	}
+	
+	public void clickMenuButton() {
+		menuButton.click();
 	}
 	
 	//Method to Click All Item
