@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 
 public class LoginPage{
 	
+    private WebDriver d;
+
     private static final Logger logger = LoggerFactory.getLogger(LoginPage.class);
 	
 	@FindBy(xpath = "//input[@id='user-name']")
@@ -29,10 +31,12 @@ public class LoginPage{
     WebElement inventoryList;
 
 	
-	public  LoginPage(WebDriver d)
+	public  LoginPage(WebDriver driver)
 	{
-		PageFactory.initElements(d, this);
-	}
+		this.d = driver;
+        PageFactory.initElements(d, this); // Ensure PageFactory is initialized
+    }
+	
 	
 	public void enterUsername(String user)
 	{

@@ -21,7 +21,11 @@ public class HomepageTest extends BaseTest {
 	
 	@Test
 	public void validateHomePage() {
-		
+		if (homePage.isTitleHomePageDisplayed()) {
+			System.out.println("Displayed Succesfully Home Page.");
+		}else {
+			System.out.println("Not Displayed Home Page.");
+		}
 	}
    
 }

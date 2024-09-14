@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\PC\AppData\Local\Temp\testng-eclipse-60139700\testng-customsuite.xml</span>
+                    <span>C:\Users\PC\AppData\Local\Temp\testng-eclipse--1222994487\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -103,7 +103,7 @@
                     <div class="method-list-content skipped suite-Default_suite">
                       <span>
                         <img src="skipped.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.swaglabs.testcases.HomepageTest" class="method navigator-link" hash-for-method="testFilterOption">testFilterOption</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="com.swaglabs.testcases.HomepageTest" class="method navigator-link" hash-for-method="validateHomePage">validateHomePage</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content skipped suite-Default_suite -->
@@ -126,15 +126,15 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="testFilterOption">
-                  </a> <!-- testFilterOption -->
-                  <span class="method-name">testFilterOption</span>
+                  <a name="validateHomePage">
+                  </a> <!-- validateHomePage -->
+                  <span class="method-name">validateHomePage</span>
                   <div class="stack-trace">java.lang.NullPointerException: Cannot invoke &quot;org.openqa.selenium.SearchContext.findElement(org.openqa.selenium.By)&quot; because &quot;this.searchContext&quot; is null
 	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
 	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at jdk.proxy2/jdk.proxy2.$Proxy21.sendKeys(Unknown Source)
+	at jdk.proxy2/jdk.proxy2.$Proxy12.sendKeys(Unknown Source)
 	at com.swaglabs.pages.LoginPage.enterUsername(LoginPage.java:39)
-	at com.swaglabs.testcases.HomepageTest.setUpTest(HomepageTest.java:27)
+	at com.swaglabs.testcases.HomepageTest.setupmethod(HomepageTest.java:17)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -176,7 +176,7 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\PC\AppData\Local\Temp\testng-eclipse-60139700\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\PC\AppData\Local\Temp\testng-eclipse--1222994487\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -185,11 +185,7 @@
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.swaglabs.testcases.HomepageTest&quot;&gt;
-        &lt;methods&gt;
-          &lt;include name=&quot;testFilterOption&quot;/&gt;
-        &lt;/methods&gt;
-      &lt;/class&gt; &lt;!-- com.swaglabs.testcases.HomepageTest --&gt;
+      &lt;class name=&quot;com.swaglabs.testcases.HomepageTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -231,7 +227,7 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'testFilterOption')
+data.setCell(0, 1, 'validateHomePage')
 data.setCell(0, 2, 'com.swaglabs.testcases.HomepageTest')
 data.setCell(0, 3, 0);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
@@ -272,8 +268,8 @@ return data;
               <div class="configuration-method before">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">setUpTest</span>
-                <span class="method-start">4911 ms</span>
+                <span class="method-name">setupmethod</span>
+                <span class="method-start">8638 ms</span>
               </div> <!-- configuration-method before -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

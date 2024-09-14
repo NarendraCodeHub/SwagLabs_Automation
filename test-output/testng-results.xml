@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="1" passed="0" failed="0" skipped="1">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-09-05T22:55:34 IST" name="Default suite" finished-at="2024-09-05T22:55:39 IST" duration-ms="5026">
+  <suite started-at="2024-09-14T20:17:28 IST" name="Default suite" finished-at="2024-09-14T20:17:37 IST" duration-ms="8712">
     <groups>
     </groups>
-    <test started-at="2024-09-05T22:55:34 IST" name="Default test" finished-at="2024-09-05T22:55:39 IST" duration-ms="5026">
+    <test started-at="2024-09-14T20:17:28 IST" name="Default test" finished-at="2024-09-14T20:17:37 IST" duration-ms="8712">
       <class name="com.swaglabs.testcases.HomepageTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:com.swaglabs.testcases.HomepageTest@6f10d5b6]" started-at="2024-09-05T22:55:34 IST" name="setup" finished-at="2024-09-05T22:55:39 IST" duration-ms="4896" status="PASS">
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.swaglabs.testcases.HomepageTest@58670130]" started-at="2024-09-14T20:17:28 IST" name="setup" finished-at="2024-09-14T20:17:37 IST" duration-ms="8621" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method is-config="true" signature="setUpTest()[pri:0, instance:com.swaglabs.testcases.HomepageTest@6f10d5b6]" started-at="2024-09-05T22:55:39 IST" name="setUpTest" finished-at="2024-09-05T22:55:39 IST" duration-ms="27" status="FAIL">
+        <test-method is-config="true" signature="setupmethod()[pri:0, instance:com.swaglabs.testcases.HomepageTest@58670130]" started-at="2024-09-14T20:17:37 IST" name="setupmethod" finished-at="2024-09-14T20:17:37 IST" duration-ms="1" status="FAIL">
           <exception class="java.lang.NullPointerException">
             <message>
               <![CDATA[Cannot invoke "org.openqa.selenium.SearchContext.findElement(org.openqa.selenium.By)" because "this.searchContext" is null]]>
@@ -20,9 +20,9 @@
               <![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.SearchContext.findElement(org.openqa.selenium.By)" because "this.searchContext" is null
 at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
 at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-at jdk.proxy2/jdk.proxy2.$Proxy21.sendKeys(Unknown Source)
+at jdk.proxy2/jdk.proxy2.$Proxy12.sendKeys(Unknown Source)
 at com.swaglabs.pages.LoginPage.enterUsername(LoginPage.java:39)
-at com.swaglabs.testcases.HomepageTest.setUpTest(HomepageTest.java:27)
+at com.swaglabs.testcases.HomepageTest.setupmethod(HomepageTest.java:17)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -60,8 +60,8 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
           </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setUpTest -->
-        <test-method signature="testFilterOption()[pri:0, instance:com.swaglabs.testcases.HomepageTest@6f10d5b6]" started-at="2024-09-05T22:55:39 IST" name="testFilterOption" finished-at="2024-09-05T22:55:39 IST" duration-ms="0" status="SKIP">
+        </test-method> <!-- setupmethod -->
+        <test-method signature="validateHomePage()[pri:0, instance:com.swaglabs.testcases.HomepageTest@58670130]" started-at="2024-09-14T20:17:37 IST" name="validateHomePage" finished-at="2024-09-14T20:17:37 IST" duration-ms="0" status="SKIP">
           <exception class="java.lang.NullPointerException">
             <message>
               <![CDATA[Cannot invoke "org.openqa.selenium.SearchContext.findElement(org.openqa.selenium.By)" because "this.searchContext" is null]]>
@@ -70,9 +70,9 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
               <![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.SearchContext.findElement(org.openqa.selenium.By)" because "this.searchContext" is null
 at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
 at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-at jdk.proxy2/jdk.proxy2.$Proxy21.sendKeys(Unknown Source)
+at jdk.proxy2/jdk.proxy2.$Proxy12.sendKeys(Unknown Source)
 at com.swaglabs.pages.LoginPage.enterUsername(LoginPage.java:39)
-at com.swaglabs.testcases.HomepageTest.setUpTest(HomepageTest.java:27)
+at com.swaglabs.testcases.HomepageTest.setupmethod(HomepageTest.java:17)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -110,12 +110,8 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
           </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testFilterOption -->
-        <test-method is-config="true" signature="tearDownTest()[pri:0, instance:com.swaglabs.testcases.HomepageTest@6f10d5b6]" started-at="2024-09-05T22:55:39 IST" name="tearDownTest" finished-at="2024-09-05T22:55:39 IST" duration-ms="0" status="SKIP">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDownTest -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.swaglabs.testcases.HomepageTest@6f10d5b6]" started-at="2024-09-05T22:55:39 IST" name="tearDown" finished-at="2024-09-05T22:55:39 IST" duration-ms="0" status="SKIP">
+        </test-method> <!-- validateHomePage -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.swaglabs.testcases.HomepageTest@58670130]" started-at="2024-09-14T20:17:37 IST" name="tearDown" finished-at="2024-09-14T20:17:37 IST" duration-ms="0" status="SKIP">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
