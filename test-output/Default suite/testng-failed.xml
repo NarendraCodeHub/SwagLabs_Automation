@@ -6,8 +6,9 @@
       <class name="com.swaglabs.testcases.HomepageTest">
         <methods>
           <include name="setupmethod"/>
-          <include name="validateHomePage"/>
           <include name="setup"/>
+          <include name="validateHomePage"/>
+          <include name="close"/>
           <include name="tearDown"/>
         </methods>
       </class> <!-- com.swaglabs.testcases.HomepageTest -->
