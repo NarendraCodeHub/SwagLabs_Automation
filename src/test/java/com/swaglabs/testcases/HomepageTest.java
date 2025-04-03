@@ -69,4 +69,9 @@ public class HomepageTest extends BaseTest {
 		Assert.assertTrue(signBtn.isDisplayed(), "Sign-in button is not displayed on the page!");
 	}
 
+	@Test
+	public void verifyLogoutMenuOption() {
+		hp.clickLogout();
+		Assert.assertTrue(lp.isUsernameVisible(), "UserName Text is not displayed on this page.");
+	}
 }
