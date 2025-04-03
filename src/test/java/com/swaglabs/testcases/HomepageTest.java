@@ -36,8 +36,14 @@ public class HomepageTest extends BaseTest {
 	}
 
 	@Test
-	private void verifyAllProductsAreDisplayed() {
+	public void verifyAllProductsAreDisplayed() {
 		Assert.assertTrue(hp.areAllProductsDisplayed(), "Not all products are displayed on the homepage.");
+
+	}
+
+	@Test
+	public void verifyMenuOptionsDisplayed() {
+		Assert.assertTrue(hp.areMenuOptionsDisplayed(), "Menu options are not displayed correctly.");
 
 	}
 

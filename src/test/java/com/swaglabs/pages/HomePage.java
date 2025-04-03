@@ -1,14 +1,18 @@
 package com.swaglabs.pages;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import io.netty.handler.timeout.TimeoutException;
 
 public class HomePage {
 
@@ -204,6 +208,33 @@ public class HomePage {
 			break;
 		default:
 			System.out.println("Invalid product name");
+		}
+	}
+
+	// Verify all menu options are displayed
+	public boolean areMenuOptionsDisplayed() {
+		try {
+			clickMenuButton(); // Open menu before checking
+
+			List<WebElement> menuOptions = Arrays.asList(AllItem, About, LogoutButton, ResetAppState);
+
+			for (WebElement option : menuOptions) {
+				try {
+					if (!option.isDisplayed()) {
+						logger.warn("Menu option not displayed: " + option.getText());
+						return false;
+					}
+				} catch (TimeoutException | NoSuchElementException e) {
+					logger.error("Menu option not found or not visible: " + e.getMessage());
+					return false;
+				}
+			}
+
+			logger.info("All menu options are displayed correctly.");
+			return true;
+		} catch (Exception e) {
+			logger.error("Error verifying menu options. Exception: " + e.getMessage());
+			return false;
 		}
 	}
 
