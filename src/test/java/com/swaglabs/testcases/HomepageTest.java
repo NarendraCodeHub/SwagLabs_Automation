@@ -1,5 +1,11 @@
 package com.swaglabs.testcases;
 
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -45,6 +51,22 @@ public class HomepageTest extends BaseTest {
 	public void verifyMenuOptionsDisplayed() {
 		Assert.assertTrue(hp.areMenuOptionsDisplayed(), "Menu options are not displayed correctly.");
 
+	}
+
+	@Test
+	public void verifyAllItemMenuOption() {
+		hp.clickMenuButton();
+		hp.clickAllItem();
+	}
+
+	@Test
+	public void verifyAboutMenuOption() {
+		// About Menu Option
+		hp.clickMenuButton();
+		hp.clickAbout();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebElement signBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[.='Sign in']")));
+		Assert.assertTrue(signBtn.isDisplayed(), "Sign-in button is not displayed on the page!");
 	}
 
 }
