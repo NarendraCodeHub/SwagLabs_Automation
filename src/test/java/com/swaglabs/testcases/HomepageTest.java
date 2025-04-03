@@ -1,5 +1,6 @@
 package com.swaglabs.testcases;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -32,6 +33,12 @@ public class HomepageTest extends BaseTest {
 		} else {
 			System.out.println("HomePage Not Displayed !!!");
 		}
+	}
+
+	@Test
+	private void verifyAllProductsAreDisplayed() {
+		Assert.assertTrue(hp.areAllProductsDisplayed(), "Not all products are displayed on the homepage.");
+
 	}
 
 }
