@@ -103,7 +103,6 @@ public class HomePage {
 			logger.info("Clicked on 'All Items' successfully.");
 		} catch (Exception e) {
 			logger.error("Failed to click on 'All Items'. Exception: " + e.getMessage());
-			// taking a screenshot
 		}
 	}
 
