@@ -1,6 +1,9 @@
 package com.swaglabs.testcases;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -107,4 +110,81 @@ public class HomepageTest extends BaseTest {
 			logger.info("Reset App State is working correctly.");
 		}
 	}
+
+	@Test
+	public void verifyFilter_ZtoA() {
+
+		hp.chooseFilterOption("Name (Z to A)");
+
+		List<WebElement> products = driver.findElements(By.cssSelector(".inventory_item_name"));
+
+		List<String> actualProductNames = new ArrayList<>();
+		for (WebElement product : products) {
+			actualProductNames.add(product.getText());
+		}
+
+		List<String> expectedProductNames = new ArrayList<>(actualProductNames);
+		expectedProductNames.sort(Comparator.reverseOrder());
+
+		Assert.assertEquals(actualProductNames, expectedProductNames,
+				"Products are not sorted correctly in Z to A order.");
+	}
+
+	@Test
+	public void verifyFilter_AtoZ() {
+
+		hp.chooseFilterOption("Name (A to Z)");
+
+		List<WebElement> products = driver.findElements(By.cssSelector(".inventory_item_name"));
+
+		List<String> actualProductNames = new ArrayList<>();
+		for (WebElement product : products) {
+			actualProductNames.add(product.getText());
+		}
+
+		List<String> expectedProductNames = new ArrayList<>(actualProductNames);
+		expectedProductNames.sort(Comparator.naturalOrder());
+
+		Assert.assertEquals(actualProductNames, expectedProductNames,
+				"Products are not sorted correctly in A to Z order.");
+	}
+
+	@Test
+	public void verifyFilter_LowToHigh() {
+
+		hp.chooseFilterOption("Price (low to high)");
+
+		List<WebElement> priceElements = driver.findElements(By.cssSelector(".inventory_item_price"));
+
+		List<Double> actualPrices = new ArrayList<>();
+		for (WebElement price : priceElements) {
+			String priceText = price.getText().replace("$", "").trim();
+			actualPrices.add(Double.parseDouble(priceText));
+		}
+
+		List<Double> expectedPrices = new ArrayList<>(actualPrices);
+		expectedPrices.sort(Comparator.naturalOrder());
+
+		Assert.assertEquals(actualPrices, expectedPrices, "Products are not sorted by price (low to high).");
+	}
+
+	@Test
+	public void verifyFilter_HighToLow() {
+
+		hp.chooseFilterOption("Price (high to low)");
+
+		List<WebElement> priceElements = driver.findElements(By.cssSelector(".inventory_item_price"));
+
+		List<Double> actualPrices = new ArrayList<>();
+		for (WebElement price : priceElements) {
+			String priceText = price.getText().replace("$", "").trim();
+			actualPrices.add(Double.parseDouble(priceText));
+		}
+
+		List<Double> expectedPrices = new ArrayList<>(actualPrices);
+		expectedPrices.sort(Comparator.reverseOrder());
+
+		Assert.assertEquals(actualPrices, expectedPrices, "Products are not sorted by Price (high to low).");
+	}
+
 }
