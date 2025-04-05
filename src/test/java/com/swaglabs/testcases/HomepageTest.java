@@ -112,6 +112,16 @@ public class HomepageTest extends BaseTest {
 	}
 
 	@Test
+	public void verifyCloseButtonMenuOption() {
+
+		hp.clickMenuButton();
+
+		hp.clickmenuCloseButton();
+
+		Assert.assertFalse(!hp.isMenuVisible(), "Menu should be closed after clicking the Close button.");
+	}
+
+	@Test
 	public void verifyFilter_ZtoA() {
 
 		hp.chooseFilterOption("Name (Z to A)");

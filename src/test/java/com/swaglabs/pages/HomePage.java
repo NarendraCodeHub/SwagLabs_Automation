@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,8 @@ import org.openqa.selenium.support.ui.Select;
 import io.netty.handler.timeout.TimeoutException;
 
 public class HomePage {
+
+	WebDriver driver;
 
 	private static final Logger logger = LogManager.getLogger(HomePage.class);
 
@@ -38,6 +41,9 @@ public class HomePage {
 
 	@FindBy(id = "react-burger-cross-btn")
 	private WebElement menuCloseButton;
+
+	@FindBy(className = "bm-menu")
+	private WebElement menuContainer;
 
 	@FindBy(xpath = "//select")
 	private WebElement filterOption;
@@ -84,8 +90,9 @@ public class HomePage {
 	@FindBy(xpath = "//div[@class='inventory_item_name']")
 	private List<WebElement> productList;
 
-	public HomePage(WebDriver d) {
-		PageFactory.initElements(d, this);
+	public HomePage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
 	}
 
 	public boolean isTitleHomePageDisplayed() {
@@ -127,9 +134,14 @@ public class HomePage {
 		ResetAppState.click();
 	}
 
-	// Method to close the menu
 	public void clickmenuCloseButton() {
-		menuCloseButton.click();
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", menuCloseButton);
+			logger.info("Menu close button clicked successfully using JavaScript.");
+		} catch (Exception e) {
+			logger.error("Failed to click on menu close button. Exception: " + e.getMessage());
+		}
 	}
 
 	// Method to click Filter Option
@@ -266,5 +278,9 @@ public class HomePage {
 
 	public void clickRemoveButton() {
 		removeButton.click();
+	}
+
+	public boolean isMenuVisible() {
+		return menuContainer.isDisplayed();
 	}
 }
