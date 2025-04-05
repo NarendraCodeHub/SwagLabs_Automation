@@ -1,5 +1,6 @@
 package com.swaglabs.pages;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,9 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-
-import io.netty.handler.timeout.TimeoutException;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
 
@@ -67,7 +68,10 @@ public class HomePage {
 	private WebElement item_TShirt_Red;
 
 	@FindBy(className = "shopping_cart_link")
-	private WebElement cart;
+	private WebElement cartIcon;
+
+	@FindBy(className = "shopping_cart_badge")
+	private WebElement cartBadge;
 
 	@FindBy(xpath = "//a[.='Twitter']")
 	private WebElement socialTwitter;
@@ -78,9 +82,6 @@ public class HomePage {
 	@FindBy(xpath = "//a[.='LinkedIn']")
 	private WebElement socialLinkedIn;
 
-	@FindBy(xpath = "//button[.='Add to cart']")
-	private WebElement addtoCartButton;
-
 	@FindBy(id = "back-to-products")
 	private WebElement backtoProductButton;
 
@@ -89,6 +90,24 @@ public class HomePage {
 
 	@FindBy(xpath = "//div[@class='inventory_item_name']")
 	private List<WebElement> productList;
+
+	@FindBy(id = "add-to-cart-sauce-labs-backpack")
+	private WebElement addToCart_Backpack;
+
+	@FindBy(id = "add-to-cart-sauce-labs-bike-light")
+	private WebElement addToCart_BikeLight;
+
+	@FindBy(id = "add-to-cart-sauce-labs-bolt-t-shirt")
+	private WebElement addToCart_BoltTShirt;
+
+	@FindBy(id = "add-to-cart-sauce-labs-fleece-jacket")
+	private WebElement addToCart_FleeceJacket;
+
+	@FindBy(id = "add-to-cart-sauce-labs-onesie")
+	private WebElement addToCart_Onesie;
+
+	@FindBy(id = "add-to-cart-test.allthethings()-t-shirt-(red)")
+	private WebElement addToCart_TestAllTheThingsRed;
 
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
@@ -222,21 +241,65 @@ public class HomePage {
 		}
 	}
 
-	// Verify all menu options are displayed
+	public void clickAddToCartByProductName(String productName) {
+		switch (productName.toLowerCase()) {
+		case "sauce labs backpack":
+			addToCart_Backpack.click();
+			break;
+		case "sauce labs bike light":
+			addToCart_BikeLight.click();
+			break;
+		case "sauce labs bolt t-shirt":
+			addToCart_BoltTShirt.click();
+			break;
+		case "sauce labs fleece jacket":
+			addToCart_FleeceJacket.click();
+			break;
+		case "sauce labs onesie":
+			addToCart_Onesie.click();
+			break;
+		case "test.allthethings() t-shirt (red)":
+			addToCart_TestAllTheThingsRed.click();
+			break;
+		default:
+			throw new IllegalArgumentException("Product not recognized: " + productName);
+		}
+	}
+
+	// Cart
+	public boolean isCartIconVisible() {
+		return cartIcon.isDisplayed();
+	}
+
+	public boolean isCartIconClickable() {
+		return cartIcon.isEnabled();
+	}
+
+	public void clickCart() {
+		cartIcon.click();
+	}
+
+	public int getCartCount() {
+		try {
+			return Integer.parseInt(cartBadge.getText());
+		} catch (NoSuchElementException | NumberFormatException e) {
+			return 0;
+		}
+	}
+
 	public boolean areMenuOptionsDisplayed() {
 		try {
-			clickMenuButton(); // Open menu before checking
+			clickMenuButton();
+
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
 			List<WebElement> menuOptions = Arrays.asList(AllItem, About, LogoutButton, ResetAppState);
 
+			wait.until(ExpectedConditions.visibilityOfAllElements(menuOptions));
+
 			for (WebElement option : menuOptions) {
-				try {
-					if (!option.isDisplayed()) {
-						logger.warn("Menu option not displayed: " + option.getText());
-						return false;
-					}
-				} catch (TimeoutException | NoSuchElementException e) {
-					logger.error("Menu option not found or not visible: " + e.getMessage());
+				if (!option.isDisplayed()) {
+					logger.warn("Menu option not displayed: " + option.getText());
 					return false;
 				}
 			}
@@ -247,11 +310,6 @@ public class HomePage {
 			logger.error("Error verifying menu options. Exception: " + e.getMessage());
 			return false;
 		}
-	}
-
-	// Cart
-	public void clickCart() {
-		cart.click();
 	}
 
 	// Social Link
@@ -265,11 +323,6 @@ public class HomePage {
 
 	public void clickSocialLinkedIn() {
 		socialLinkedIn.click();
-	}
-
-	// Each Product
-	public void clickAddToCartButton() {
-		addtoCartButton.click();
 	}
 
 	public void clickBackToProductButton() {

@@ -18,6 +18,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.swaglabs.pages.BaseTest;
+import com.swaglabs.pages.CartPage;
 import com.swaglabs.pages.HomePage;
 import com.swaglabs.pages.LoginPage;
 
@@ -26,6 +27,7 @@ public class HomepageTest extends BaseTest {
 
 	private LoginPage lp;
 	private HomePage hp;
+	private CartPage cp;
 
 	public String userName = "standard_user";
 	public String password = "secret_sauce";
@@ -34,6 +36,7 @@ public class HomepageTest extends BaseTest {
 	public void setupTest() {
 		lp = new LoginPage(driver);
 		hp = new HomePage(driver);
+		cp = new CartPage(driver);
 
 		lp.enterUsername(userName);
 		lp.enterPassword(password);
@@ -43,6 +46,7 @@ public class HomepageTest extends BaseTest {
 	@AfterMethod
 	public void closeTest() {
 		hp.clickLogout();
+		driver.manage().deleteAllCookies();
 	}
 
 	@Test
@@ -60,12 +64,11 @@ public class HomepageTest extends BaseTest {
 	}
 
 	@Test
-	public void verifyMenuOptionsDisplayed() throws InterruptedException {
+	public void verifyMenuOptionsDisplayed() {
 		Assert.assertTrue(hp.areMenuOptionsDisplayed(), "Menu options are not displayed correctly.");
-		driver.wait(2000);
-		hp.clickmenuCloseButton();
 	}
 
+	@Test
 	public void verifyAllItemMenuOption() {
 		hp.clickMenuButton();
 		hp.clickAllItem();
@@ -78,11 +81,11 @@ public class HomepageTest extends BaseTest {
 		} else {
 			logger.info("All Items menu option is working correctly.");
 		}
+		hp.clickmenuCloseButton();
 	}
 
 	@Test
 	public void verifyAboutMenuOption() {
-		// About Menu Option
 		hp.clickMenuButton();
 		hp.clickAbout();
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -104,11 +107,16 @@ public class HomepageTest extends BaseTest {
 		hp.clickResetAppState();
 
 		try {
-			WebElement cartBadge = driver.findElement(By.className("shopping_cart_badge"));
+			// WebElement cartBadge =
+			// driver.findElement(By.className("shopping_cart_badge"));
 			Assert.fail("Bug: Reset App State is not working! Cart badge is still visible.");
 		} catch (NoSuchElementException e) {
 			logger.info("Reset App State is working correctly.");
 		}
+
+		driver.navigate().refresh();
+		hp.clickMenuButton();
+		hp.clickmenuCloseButton();
 	}
 
 	@Test
@@ -195,6 +203,49 @@ public class HomepageTest extends BaseTest {
 		expectedPrices.sort(Comparator.reverseOrder());
 
 		Assert.assertEquals(actualPrices, expectedPrices, "Products are not sorted by Price (high to low).");
+	}
+
+	@Test
+	public void verifyCartWithoutProduct() {
+		hp.clickCart();
+		Assert.assertFalse(cp.isVisibleCartItem(), "Cart should be empty, but an item is visible.");
+
+	}
+
+	@Test
+	public void verifySingleProductCartBadgeCount() {
+		hp.clickAddToCartByProductName("Sauce Labs Backpack");
+		int cartCount = hp.getCartCount();
+
+		Assert.assertEquals(cartCount, 1, "Cart badge count should be 1 after adding one product.");
+	}
+
+	@Test
+	public void verifyMultipleProductsCartBadgeCount() {
+		hp.clickAddToCartByProductName("Sauce Labs Backpack");
+		hp.clickAddToCartByProductName("Sauce Labs Bike Light");
+		hp.clickAddToCartByProductName("Sauce Labs Bolt T-Shirt");
+		hp.clickAddToCartByProductName("Test.allTheThings() T-Shirt (Red)");
+
+		int cartCount = hp.getCartCount();
+
+		Assert.assertEquals(cartCount, 4, "Cart badge count should be 4 after adding four product.");
+
+	}
+
+	@Test
+	public void verifyCartIconVisibilityAndClickability() {
+
+		Assert.assertTrue(hp.isCartIconVisible(), "Cart icon is not visible on the homepage.");
+
+		Assert.assertTrue(hp.isCartIconClickable(), "Cart icon is not clickable.");
+
+		hp.clickCart();
+
+		String expectedUrl = baseURL + "cart.html";
+		String actualUrl = driver.getCurrentUrl();
+
+		Assert.assertEquals(actualUrl, expectedUrl, "Cart URL mismatch!");
 	}
 
 }
