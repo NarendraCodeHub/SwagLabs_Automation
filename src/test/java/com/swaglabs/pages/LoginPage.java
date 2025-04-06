@@ -25,7 +25,7 @@ public class LoginPage {
 	private WebElement password;
 
 	@FindBy(xpath = "//input[@id='login-button']")
-	private WebElement loginButton;
+	public WebElement loginButton;
 
 	@FindBy(xpath = "//h3[.='Epic sadface: Username and password do not match any user in this service']")
 	WebElement errorMessage;

@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -374,6 +375,25 @@ public class HomepageTest extends BaseTest {
 				}
 			}
 		}
+	}
+
+	@Test
+	public void verifyLogoutByClearingSessionCookie() {
+		Cookie sessionCookie = driver.manage().getCookieNamed("session-username");
+		if (sessionCookie != null) {
+			driver.manage().deleteCookie(sessionCookie);
+		}
+
+		driver.navigate().refresh();
+
+		boolean isLoginVisible = false;
+		try {
+			isLoginVisible = lp.loginButton.isDisplayed();
+		} catch (Exception e) {
+			isLoginVisible = false;
+		}
+
+		Assert.assertTrue(isLoginVisible, "Login button is not visible. User might still be logged in.");
 	}
 
 }
