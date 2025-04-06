@@ -82,14 +82,41 @@ public class HomePage {
 	@FindBy(xpath = "//a[.='LinkedIn']")
 	private WebElement socialLinkedIn;
 
+	@FindBy(xpath = "//div[@data-test='inventory-item-name']")
+	private WebElement productName;
+
+	@FindBy(xpath = "//div[@data-test='inventory-item-desc']")
+	private WebElement productDescription;
+
+	@FindBy(xpath = "//div[@data-test='inventory-item-price']")
+	private WebElement productPrice;
+
 	@FindBy(id = "back-to-products")
 	private WebElement backtoProductButton;
 
-	@FindBy(id = "remove")
-	private WebElement removeButton;
+	@FindBy(id = "remove-sauce-labs-backpack")
+	private WebElement removeSauceLabsBackpack;
+
+	@FindBy(id = "remove-sauce-labs-bike-light")
+	private WebElement removeSauceLabsBikeLight;
+
+	@FindBy(id = "remove-sauce-labs-bolt-t-shirt")
+	private WebElement removeSauceLabsBoltTShirt;
+
+	@FindBy(id = "remove-sauce-labs-fleece-jacket")
+	private WebElement removeSauceLabsFleeceJacket;
+
+	@FindBy(id = "remove-sauce-labs-onesie")
+	private WebElement removeSauceLabsOnesie;
+
+	@FindBy(id = "remove-test.allthethings()-t-shirt-(red)")
+	private WebElement removeTestAllTheThingsTShirtRed;
 
 	@FindBy(xpath = "//div[@class='inventory_item_name']")
 	private List<WebElement> productList;
+
+	@FindBy(xpath = "//button[.='Remove']")
+	public WebElement removeBtn;
 
 	@FindBy(id = "add-to-cart-sauce-labs-backpack")
 	private WebElement addToCart_Backpack;
@@ -266,6 +293,31 @@ public class HomePage {
 		}
 	}
 
+	public void clickRemoveButtonByProductName(String productName) {
+		switch (productName.trim().toLowerCase()) {
+		case "sauce labs backpack":
+			removeSauceLabsBackpack.click();
+			break;
+		case "sauce labs bike light":
+			removeSauceLabsBikeLight.click();
+			break;
+		case "sauce labs bolt t-shirt":
+			removeSauceLabsBoltTShirt.click();
+			break;
+		case "sauce labs fleece jacket":
+			removeSauceLabsFleeceJacket.click();
+			break;
+		case "sauce labs onesie":
+			removeSauceLabsOnesie.click();
+			break;
+		case "test.allthethings() t-shirt (red)":
+			removeTestAllTheThingsTShirtRed.click();
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid product name: " + productName);
+		}
+	}
+
 	// Cart
 	public boolean isCartIconVisible() {
 		return cartIcon.isDisplayed();
@@ -329,11 +381,24 @@ public class HomePage {
 		backtoProductButton.click();
 	}
 
-	public void clickRemoveButton() {
-		removeButton.click();
-	}
-
 	public boolean isMenuVisible() {
 		return menuContainer.isDisplayed();
 	}
+
+	public String getProductName() {
+		return productName.getText();
+	}
+
+	public String getProductDescription() {
+		return productDescription.getText();
+	}
+
+	public String getProductPrice() {
+		return productPrice.getText();
+	}
+
+	public void clickRemoveBtn() {
+		removeBtn.click();
+	}
+
 }

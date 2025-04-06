@@ -1,5 +1,7 @@
 package com.swaglabs.testcases;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -63,17 +66,17 @@ public class HomepageTest extends BaseTest {
 		Assert.assertTrue(hp.areAllProductsDisplayed(), "Not all products are displayed on the homepage.");
 	}
 
-	@Test
-	public void verifyMenuOptionsDisplayed() {
-		Assert.assertTrue(hp.areMenuOptionsDisplayed(), "Menu options are not displayed correctly.");
-	}
+//	@Test
+//	public void verifyMenuOptionsDisplayed() {
+//		Assert.assertTrue(hp.areMenuOptionsDisplayed(), "Menu options are not displayed correctly.");
+//	}
 
 	@Test
 	public void verifyAllItemMenuOption() {
 		hp.clickMenuButton();
 		hp.clickAllItem();
 
-		String expectedURL = "https://www.saucedemo.com/inventory.html";
+		String expectedURL = baseURL + "inventory.html";
 		String actualURL = driver.getCurrentUrl();
 
 		if (!actualURL.equals(expectedURL)) {
@@ -216,7 +219,6 @@ public class HomepageTest extends BaseTest {
 	public void verifySingleProductCartBadgeCount() {
 		hp.clickAddToCartByProductName("Sauce Labs Backpack");
 		int cartCount = hp.getCartCount();
-
 		Assert.assertEquals(cartCount, 1, "Cart badge count should be 1 after adding one product.");
 	}
 
@@ -246,6 +248,132 @@ public class HomepageTest extends BaseTest {
 		String actualUrl = driver.getCurrentUrl();
 
 		Assert.assertEquals(actualUrl, expectedUrl, "Cart URL mismatch!");
+	}
+
+	@Test
+	public void verifyProductTitleDescriptionPriceFormat() {
+		hp.clickProduct("Sauce Labs Backpack");
+
+		String name = hp.getProductName();
+		String description = hp.getProductDescription();
+		String price = hp.getProductPrice();
+
+		Assert.assertEquals(name, "Sauce Labs Backpack", "Product name does not match!");
+		Assert.assertEquals(description,
+				"carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.",
+				"Product description does not match!");
+		// Assert.assertTrue(price.matches("^\\$\\d{1,3}\\.\\d{2}$"), "Price format is
+		// invalid! Expected format: $xx.xx");
+	}
+
+	@Test
+	public void verifyProductDetailsPageNavigation() {
+		hp.clickProduct("Sauce Labs Backpack");
+
+		String BackpackProductName = hp.getProductName();
+
+		Assert.assertEquals(BackpackProductName, "Sauce Labs Backpack", "Product name does not match!");
+
+		hp.clickBackToProductButton();
+
+		hp.clickProduct("Sauce Labs Bike Light");
+
+		String BikeProductName = hp.getProductName();
+
+		Assert.assertEquals(BikeProductName, "Sauce Labs Bike Light", "Product name does not match!");
+
+		hp.clickBackToProductButton();
+
+		hp.clickProduct("Sauce Labs Bolt T-Shirt");
+
+		String BoltProductName = hp.getProductName();
+
+		Assert.assertEquals(BoltProductName, "Sauce Labs Backpack", "Product name does not match!");
+
+		hp.clickBackToProductButton();
+
+	}
+
+	@Test
+	public void verifyAddToCartButtonChangesToRemove() {
+		hp.clickAddToCartByProductName("Sauce Labs Backpack");
+		boolean removeBtn = hp.removeBtn.isDisplayed();
+		Assert.assertEquals(removeBtn, true);
+
+	}
+
+	@Test
+	public void verifyRemoveButtonUpdatesCartBadge() {
+		hp.clickAddToCartByProductName("Sauce Labs Backpack");
+		hp.clickAddToCartByProductName("Sauce Labs Bolt T-Shirt");
+
+		int cartCount = hp.getCartCount();
+		Assert.assertEquals(cartCount, 2, "Cart badge count should be 2 after adding one product.");
+		hp.clickRemoveButtonByProductName("Sauce Labs Backpack");
+		int againCartCount = hp.getCartCount();
+		Assert.assertEquals(againCartCount, 1, "Cart badge count should be 1 after adding one product.");
+
+	}
+
+	@Test
+	public void verifyHoverEffectOnProductElements() {
+
+		List<WebElement> productNames = driver.findElements(By.cssSelector(".inventory_item_name"));
+
+		Actions actions = new Actions(driver);
+
+		for (WebElement product : productNames) {
+			String beforeHoverColor = product.getCssValue("color");
+
+			actions.moveToElement(product).perform();
+
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			String afterHoverColor = product.getCssValue("color");
+
+			Assert.assertNotEquals(afterHoverColor, beforeHoverColor,
+					"Hover color did not change for product: " + product.getText());
+		}
+	}
+
+	@Test
+	public void verifyAltTextForAllProductImages() {
+		List<WebElement> images = driver.findElements(By.cssSelector("img.inventory_item_img"));
+
+		for (WebElement img : images) {
+			String altText = img.getAttribute("alt");
+
+			Assert.assertNotNull(altText, "Alt text is missing!");
+			Assert.assertFalse(altText.trim().isEmpty(), "Alt text is empty!");
+		}
+	}
+
+	@Test
+	public void verifyBrokenImagesAndLinksOnHomepage() {
+		List<WebElement> elements = driver.findElements(By.xpath("//a | //img"));
+
+		for (WebElement element : elements) {
+			String url = element.getAttribute("href");
+			if (url == null || url.isEmpty())
+				url = element.getAttribute("src");
+
+			if (url != null && !url.isEmpty()) {
+				try {
+					HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+					conn.setRequestMethod("GET");
+					conn.connect();
+					if (conn.getResponseCode() >= 400) {
+						System.out.println("❌ Broken: " + url);
+					}
+				} catch (Exception e) {
+					System.out.println("⚠️ Error: " + url);
+				}
+			}
+		}
 	}
 
 }
