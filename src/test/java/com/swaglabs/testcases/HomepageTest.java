@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -394,6 +395,28 @@ public class HomepageTest extends BaseTest {
 		}
 
 		Assert.assertTrue(isLoginVisible, "Login button is not visible. User might still be logged in.");
+	}
+
+	@Test
+	public void verifySocialLinkHomePage() {
+		String currentWindow = driver.getWindowHandle();
+
+		hp.clickSocialTwitter();
+		hp.clickSocialFacebook();
+		hp.clickSocialLinkedIn();
+
+		Set<String> allWindows = driver.getWindowHandles();
+
+		Assert.assertEquals(allWindows.size(), 4, "Expected 3 new social media tabs to open");
+
+		for (String window : allWindows) {
+			if (!window.equals(currentWindow)) {
+				driver.switchTo().window(window);
+				driver.close();
+			}
+		}
+
+		driver.switchTo().window(currentWindow);
 	}
 
 }
