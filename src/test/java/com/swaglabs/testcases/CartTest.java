@@ -80,4 +80,13 @@ public class CartTest extends BaseTest {
 		cartPage.verifyProductIsRemoved(productName);
 	}
 
+	@Test
+	public void verifyContinueShoppingButton() {
+		String homePageURL = driver.getCurrentUrl();
+		homePage.clickCart();
+		cartPage.clickContinueShoppingButton();
+		String currentURL = driver.getCurrentUrl();
+		Assert.assertEquals(homePageURL, currentURL);
+	}
+
 }
