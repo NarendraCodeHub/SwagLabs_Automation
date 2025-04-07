@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 public class CartPage {
 
@@ -94,6 +97,45 @@ public class CartPage {
 		default:
 			throw new IllegalArgumentException("Invalid product name: " + productName);
 		}
+	}
+
+	public boolean isElementNotDisplayed(By locator) {
+		try {
+			WebElement element = driver.findElement(locator);
+			return !element.isDisplayed();
+		} catch (NoSuchElementException e) {
+			return true;
+		}
+	}
+
+	public void verifyProductIsRemoved(String productName) {
+		boolean isProductRemoved = false;
+
+		switch (productName.trim().toLowerCase()) {
+		case "sauce labs backpack":
+			isProductRemoved = isElementNotDisplayed(By.id("item_4_title_link"));
+			break;
+		case "sauce labs bike light":
+			isProductRemoved = isElementNotDisplayed(By.id("item_0_title_link"));
+			break;
+		case "sauce labs bolt t-shirt":
+			isProductRemoved = isElementNotDisplayed(By.id("item_1_title_link"));
+			break;
+		case "sauce labs fleece jacket":
+			isProductRemoved = isElementNotDisplayed(By.id("item_5_title_link"));
+			break;
+		case "sauce labs onesie":
+			isProductRemoved = isElementNotDisplayed(By.id("item_2_title_link"));
+			break;
+		case "test.allthethings() t-shirt (red)":
+			isProductRemoved = isElementNotDisplayed(By.id("item_3_title_link"));
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid product name: " + productName);
+		}
+
+		Assert.assertTrue(isProductRemoved, "Product [" + productName + "] is still displayed in the cart!");
+
 	}
 
 }

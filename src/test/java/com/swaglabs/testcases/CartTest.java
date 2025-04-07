@@ -73,10 +73,11 @@ public class CartTest extends BaseTest {
 
 	@Test
 	public void verifyRemoveProductFromCart() {
-		homePage.clickAddToCartByProductName("Sauce Labs Backpack");
+		String productName = "Sauce Labs Backpack";
+		homePage.clickAddToCartByProductName(productName);
 		homePage.clickCart();
-		cartPage.removeProductByName("Sauce Labs Backpack");
-
+		cartPage.removeProductByName(productName);
+		cartPage.verifyProductIsRemoved(productName);
 	}
 
 }
