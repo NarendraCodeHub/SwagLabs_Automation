@@ -81,6 +81,26 @@ public class CartTest extends BaseTest {
 	}
 
 	@Test
+	public void verifyAllProductRemoveFromCart() {
+		String[] products = { "Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt",
+				"Sauce Labs Fleece Jacket", "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)" };
+
+		for (String product : products) {
+			homePage.clickAddToCartByProductName(product);
+		}
+
+		homePage.clickCart();
+
+		for (String product : products) {
+			cartPage.removeProductByName(product);
+		}
+
+		for (String product : products) {
+			cartPage.verifyProductIsRemoved(product);
+		}
+	}
+
+	@Test
 	public void verifyContinueShoppingButton() {
 		String homePageURL = driver.getCurrentUrl();
 		homePage.clickCart();
