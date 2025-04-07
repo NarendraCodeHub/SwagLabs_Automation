@@ -89,4 +89,12 @@ public class CartTest extends BaseTest {
 		Assert.assertEquals(homePageURL, currentURL);
 	}
 
+	@Test
+	public void verifyCheckoutButtonOnCart() {
+		String checkoutURL = baseURL + "checkout-step-one.html";
+		homePage.clickCart();
+		cartPage.clickCheckoutButton();
+		String cartCurrentURL = driver.getCurrentUrl();
+		Assert.assertEquals(checkoutURL, cartCurrentURL);
+	}
 }
