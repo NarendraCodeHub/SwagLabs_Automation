@@ -27,6 +27,24 @@ public class CartPage {
 	@FindBy(xpath = "//div[@class='cart_item']")
 	private List<WebElement> cartItems;
 
+	@FindBy(id = "remove-sauce-labs-backpack")
+	private WebElement removeSauceLabsBackpack;
+
+	@FindBy(id = "remove-sauce-labs-bike-light")
+	private WebElement removeSauceLabsBikeLight;
+
+	@FindBy(id = "remove-sauce-labs-bolt-t-shirt")
+	private WebElement removeSauceLabsBoltTShirt;
+
+	@FindBy(id = "remove-sauce-labs-fleece-jacket")
+	private WebElement removeSauceLabsFleeceJacket;
+
+	@FindBy(id = "remove-sauce-labs-onesie")
+	private WebElement removeSauceLabsOnesie;
+
+	@FindBy(id = "remove-test.allthethings()-t-shirt-(red)")
+	private WebElement removeTestAllTheThingsTShirt;
+
 	public CartPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -50,6 +68,31 @@ public class CartPage {
 		} catch (Exception e) {
 			logger.error("Error checking cart items: " + e.getMessage());
 			return false;
+		}
+	}
+
+	public void removeProductByName(String productName) {
+		switch (productName.trim().toLowerCase()) {
+		case "sauce labs backpack":
+			removeSauceLabsBackpack.click();
+			break;
+		case "sauce labs bike light":
+			removeSauceLabsBikeLight.click();
+			break;
+		case "sauce labs bolt t-shirt":
+			removeSauceLabsBoltTShirt.click();
+			break;
+		case "sauce labs fleece jacket":
+			removeSauceLabsFleeceJacket.click();
+			break;
+		case "sauce labs onesie":
+			removeSauceLabsOnesie.click();
+			break;
+		case "test.allthethings() t-shirt (red)":
+			removeTestAllTheThingsTShirt.click();
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid product name: " + productName);
 		}
 	}
 
