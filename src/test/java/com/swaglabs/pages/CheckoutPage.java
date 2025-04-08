@@ -8,191 +8,193 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class Checkout {
+public class CheckoutPage {
+
+	public WebDriver driver;
 
 	@FindBy(id = "first-name")
 	private WebElement firstName;
-	
+
 	@FindBy(id = "last-name")
 	private WebElement lastName;
-	
+
 	@FindBy(id = "postal-code")
 	private WebElement postalCode;
-	
+
 	@FindBy(id = "cancel")
 	private WebElement cancelButton;
-	
+
 	@FindBy(id = "continue")
 	private WebElement continueButton;
-	
+
 	@FindBy(xpath = "//h3[.='Error: First Name is required']")
 	private WebElement errorMessageFirstname;
-	
+
 	@FindBy(xpath = "//h3[.='Error: Last Name is required']")
 	private WebElement errorMessageLastname;
-	
+
 	@FindBy(xpath = "//h3[.='Error: Postal Code is required']")
 	private WebElement errorMessagePostalcode;
-	
-	//Checkout: Overview
-	
+
+	// Checkout: Overview
+
 	@FindBy(xpath = "//span[.='Checkout: Overview']")
 	private WebElement titleCheckoutOverview;
-	
+
 	@FindBy(className = "cart_quantity")
 	private WebElement cartQuantity;
-	
+
 	@FindBy(xpath = "//div[@class='inventory_item_name']")
 	private List<WebElement> checkoutItemNames;
-	
+
 	@FindBy(xpath = "//div[@class='inventory_item_price' and @data-test='inventory-item-price']")
 	private WebElement itemPrice;
-	
+
 	@FindBy(xpath = "//div[@class='summary_info_label' and @data-test='payment-info-label']")
 	private WebElement PaymentInformation;
-	
+
 	@FindBy(xpath = "//div[@class='summary_value_label' and @data-test='payment-info-value']")
 	private WebElement PaymentInformationValue;
-	
+
 	@FindBy(xpath = "//div[@class='summary_info_label' and @data-test='shipping-info-label']")
 	private WebElement ShippingInformation;
-	
+
 	@FindBy(xpath = "//div[@class='summary_value_label' and @data-test='shipping-info-value']")
-	private WebElement  ShippingInformationValue;
-	
+	private WebElement ShippingInformationValue;
+
 	@FindBy(xpath = "//div[@class='summary_info_label' and @data-test='total-info-label']")
 	private WebElement itemSubtotal;
-	
+
 	@FindBy(xpath = "//div[@class='summary_tax_label' and @data-test='tax-label']")
 	private WebElement Tax;
-	
+
 	@FindBy(xpath = "//div[@class='summary_total_label' and @data-test='total-label']")
 	private WebElement Total;
-	
+
 	@FindBy(id = "cancel")
 	private WebElement cancelCheckoutButton;
-	
+
 	@FindBy(id = "finish")
 	private WebElement finishButton;
-	
-	//Checkout: Complete!
+
+	// Checkout: Complete!
 
 	@FindBy(xpath = "//span[.='Checkout: Complete!']")
 	private WebElement titlecheckoutComplete;
-	
+
 	@FindBy(xpath = "//h2[.='Thank you for your order!']")
 	private WebElement orderCompletemsg;
-	
+
 	@FindBy(id = "back-to-products")
 	private WebElement backHomeButton;
-	
-	
-	public Checkout(WebDriver d) {
-		PageFactory.initElements(d, this);
+
+	public CheckoutPage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
 	}
-	
-	//Checkout: Page Method
+
+	// Checkout: Page Method
 
 	public void enterfirstName(String fn) {
 		firstName.sendKeys(fn);
 	}
-	
+
 	public void enterlastName(String ln) {
 		lastName.sendKeys(ln);
 	}
-	
+
 	public void enterpostalCode(String zipcode) {
 		postalCode.sendKeys(zipcode);
 	}
-	
+
 	public void clickcancelButton() {
 		cancelButton.click();
 	}
-	
+
 	public void clickcontinueButton() {
 		continueButton.click();
 	}
-	
+
 	public boolean isErrorMessageFirstnameDisplayed() {
 		return errorMessageFirstname.isDisplayed();
 	}
-	
+
 	public boolean isErrorMessageLastnameDisplayed() {
 		return errorMessageLastname.isDisplayed();
 	}
-	
+
 	public boolean isErrorMessagePostalcodeDisplayed() {
 		return errorMessagePostalcode.isDisplayed();
 	}
-	
-	//Checkout: Overview Method
-	
+
+	// Checkout: Overview Method
+
 	public boolean isTitleCheckoutOverviewDisplayed() {
-        return titleCheckoutOverview.isDisplayed();
+		return titleCheckoutOverview.isDisplayed();
 	}
-	
+
 	public String getcartQuantity() {
 		return cartQuantity.getText();
 	}
-	
+
 	public List<String> getCheckoutItemNames() {
-	    List<String> itemNames = new ArrayList<>();
-	    for (WebElement item : checkoutItemNames) {
-	        itemNames.add(item.getText());
-	    }
-	    return itemNames;
+		List<String> itemNames = new ArrayList<>();
+		for (WebElement item : checkoutItemNames) {
+			itemNames.add(item.getText());
+		}
+		return itemNames;
 	}
-	
+
 	public String getitemPrice() {
 		return itemPrice.getText();
 	}
-	
+
 	public String getPaymentInformation() {
 		return PaymentInformation.getText();
 	}
-	
+
 	public String getPaymentInformationValue() {
 		return PaymentInformationValue.getText();
 	}
-	
+
 	public String getShippingInformation() {
 		return ShippingInformation.getText();
 	}
-	
+
 	public String getShippingInformationValue() {
 		return ShippingInformationValue.getText();
 	}
-	
+
 	public String getitemSubtotal() {
 		return itemSubtotal.getText();
 	}
-	
+
 	public String getTax() {
 		return Tax.getText();
 	}
-	
+
 	public String getTotal() {
 		return Total.getText();
 	}
-	
+
 	public void clickcancelCheckoutButton() {
 		cancelCheckoutButton.click();
 	}
-	
+
 	public void clickfinishButton() {
 		finishButton.click();
 	}
-	
-	//Checkout: Complete! Method
-	
+
+	// Checkout: Complete! Method
+
 	public boolean isTitlecheckoutComplete() {
-        return titlecheckoutComplete.isDisplayed();
+		return titlecheckoutComplete.isDisplayed();
 	}
-	
+
 	public boolean isDisplayorderCompletemsg() {
 		return orderCompletemsg.isDisplayed();
 	}
-	
+
 	public void clickbackHomeButton() {
 		backHomeButton.click();
 	}
