@@ -20,8 +20,8 @@ public class CheckoutTest extends BaseTest {
 	private CartPage cartPage;
 	private CheckoutPage checkoutPage;
 
-	public String userName = "standard_user";
-	public String password = "secret_sauce";
+	private final String userName = "standard_user";
+	private final String password = "secret_sauce";
 
 	@BeforeMethod
 	public void setupTest() {
@@ -36,7 +36,7 @@ public class CheckoutTest extends BaseTest {
 	}
 
 	@AfterMethod
-	public void closeTest() {
+	public void tearDown() {
 		homePage.clickLogout();
 		driver.manage().deleteAllCookies();
 	}
@@ -50,7 +50,7 @@ public class CheckoutTest extends BaseTest {
 		cartPage.clickCheckoutButton();
 
 		String actualURL = driver.getCurrentUrl();
-		assertEquals(expectedCheckoutURL, actualURL, "Checkout Step One URL should match");
+		assertEquals(actualURL, expectedCheckoutURL, "Checkout Step One URL should match");
 	}
 
 	@Test
@@ -59,9 +59,9 @@ public class CheckoutTest extends BaseTest {
 		homePage.clickCart();
 		cartPage.clickCheckoutButton();
 
-		assertTrue(checkoutPage.firstName.isDisplayed(), "First Name field should be displayed");
-		assertTrue(checkoutPage.lastName.isDisplayed(), "Last Name field should be displayed");
-		assertTrue(checkoutPage.postalCode.isDisplayed(), "Postal Code field should be displayed");
+		assertTrue(checkoutPage.getFirstNameField().isDisplayed(), "First Name field should be displayed");
+		assertTrue(checkoutPage.getLastNameField().isDisplayed(), "Last Name field should be displayed");
+		assertTrue(checkoutPage.getPostalCodeField().isDisplayed(), "Postal Code field should be displayed");
 	}
 
 	@Test
@@ -70,19 +70,19 @@ public class CheckoutTest extends BaseTest {
 		homePage.clickCart();
 		cartPage.clickCheckoutButton();
 
-		checkoutPage.clickcontinueButton();
+		checkoutPage.clickContinueButton();
 		assertTrue(checkoutPage.isErrorMessageFirstnameDisplayed(), "First name error message should be displayed");
-		checkoutPage.enterfirstName("Narendra");
+		checkoutPage.enterFirstName("Narendra");
 
-		checkoutPage.clickcontinueButton();
+		checkoutPage.clickContinueButton();
 		assertTrue(checkoutPage.isErrorMessageLastnameDisplayed(), "Last name error message should be displayed");
-		checkoutPage.enterlastName("Kumar");
+		checkoutPage.enterLastName("Kumar");
 
-		checkoutPage.clickcontinueButton();
+		checkoutPage.clickContinueButton();
 		assertTrue(checkoutPage.isErrorMessagePostalcodeDisplayed(), "Postal code error message should be displayed");
-		checkoutPage.enterpostalCode("201301");
+		checkoutPage.enterPostalCode("201301");
 
-		checkoutPage.clickcontinueButton();
+		checkoutPage.clickContinueButton();
 	}
 
 	@Test
@@ -91,13 +91,12 @@ public class CheckoutTest extends BaseTest {
 		homePage.clickCart();
 		cartPage.clickCheckoutButton();
 
-		checkoutPage.enterfirstName("Narendra");
-		checkoutPage.enterlastName("Kumar");
-		checkoutPage.enterpostalCode("201301");
+		checkoutPage.enterFirstName("Narendra");
+		checkoutPage.enterLastName("Kumar");
+		checkoutPage.enterPostalCode("201301");
 
-		checkoutPage.clickcontinueButton();
+		checkoutPage.clickContinueButton();
 
 		assertTrue(checkoutPage.isTitleCheckoutOverviewDisplayed(), "Checkout Overview should be displayed.");
-
 	}
 }

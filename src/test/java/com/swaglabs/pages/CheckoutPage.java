@@ -13,13 +13,13 @@ public class CheckoutPage {
 	public WebDriver driver;
 
 	@FindBy(id = "first-name")
-	public WebElement firstName;
+	private WebElement firstName;
 
 	@FindBy(id = "last-name")
-	public WebElement lastName;
+	private WebElement lastName;
 
 	@FindBy(id = "postal-code")
-	public WebElement postalCode;
+	private WebElement postalCode;
 
 	@FindBy(id = "cancel")
 	private WebElement cancelButton;
@@ -95,15 +95,27 @@ public class CheckoutPage {
 
 	// Checkout: Page Method
 
-	public void enterfirstName(String fn) {
+	public WebElement getFirstNameField() {
+		return firstName;
+	}
+
+	public WebElement getLastNameField() {
+		return lastName;
+	}
+
+	public WebElement getPostalCodeField() {
+		return postalCode;
+	}
+
+	public void enterFirstName(String fn) {
 		firstName.sendKeys(fn);
 	}
 
-	public void enterlastName(String ln) {
+	public void enterLastName(String ln) {
 		lastName.sendKeys(ln);
 	}
 
-	public void enterpostalCode(String zipcode) {
+	public void enterPostalCode(String zipcode) {
 		postalCode.sendKeys(zipcode);
 	}
 
@@ -111,7 +123,7 @@ public class CheckoutPage {
 		cancelButton.click();
 	}
 
-	public void clickcontinueButton() {
+	public void clickContinueButton() {
 		continueButton.click();
 	}
 
