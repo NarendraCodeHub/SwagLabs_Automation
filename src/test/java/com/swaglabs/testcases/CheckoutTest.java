@@ -64,4 +64,25 @@ public class CheckoutTest extends BaseTest {
 		assertTrue(checkoutPage.postalCode.isDisplayed(), "Postal Code field should be displayed");
 	}
 
+	@Test
+	public void verifyEmptyFieldValidationCheckout() {
+		homePage.clickAddToCartByProductName("Sauce Labs Backpack");
+		homePage.clickCart();
+		cartPage.clickCheckoutButton();
+
+		checkoutPage.clickcontinueButton();
+		assertTrue(checkoutPage.isErrorMessageFirstnameDisplayed(), "First name error message should be displayed");
+		checkoutPage.enterfirstName("Narendra");
+
+		checkoutPage.clickcontinueButton();
+		assertTrue(checkoutPage.isErrorMessageLastnameDisplayed(), "Last name error message should be displayed");
+		checkoutPage.enterlastName("Kumar");
+
+		checkoutPage.clickcontinueButton();
+		assertTrue(checkoutPage.isErrorMessagePostalcodeDisplayed(), "Postal code error message should be displayed");
+		checkoutPage.enterpostalCode("201301");
+
+		checkoutPage.clickcontinueButton();
+	}
+
 }
