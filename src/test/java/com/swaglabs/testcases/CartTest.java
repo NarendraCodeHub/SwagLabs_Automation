@@ -117,4 +117,5 @@ public class CartTest extends BaseTest {
 		String cartCurrentURL = driver.getCurrentUrl();
 		Assert.assertEquals(checkoutURL, cartCurrentURL);
 	}
+
 }
