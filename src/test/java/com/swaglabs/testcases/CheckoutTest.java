@@ -85,4 +85,19 @@ public class CheckoutTest extends BaseTest {
 		checkoutPage.clickcontinueButton();
 	}
 
+	@Test
+	public void verifyValidCheckoutFormSubmission() {
+		homePage.clickAddToCartByProductName("Sauce Labs Backpack");
+		homePage.clickCart();
+		cartPage.clickCheckoutButton();
+
+		checkoutPage.enterfirstName("Narendra");
+		checkoutPage.enterlastName("Kumar");
+		checkoutPage.enterpostalCode("201301");
+
+		checkoutPage.clickcontinueButton();
+
+		assertTrue(checkoutPage.isTitleCheckoutOverviewDisplayed(), "Checkout Overview should be displayed.");
+
+	}
 }
