@@ -13,13 +13,13 @@ public class CheckoutPage {
 	public WebDriver driver;
 
 	@FindBy(id = "first-name")
-	private WebElement firstName;
+	public WebElement firstName;
 
 	@FindBy(id = "last-name")
-	private WebElement lastName;
+	public WebElement lastName;
 
 	@FindBy(id = "postal-code")
-	private WebElement postalCode;
+	public WebElement postalCode;
 
 	@FindBy(id = "cancel")
 	private WebElement cancelButton;

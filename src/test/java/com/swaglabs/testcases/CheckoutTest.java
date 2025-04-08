@@ -1,6 +1,7 @@
 package com.swaglabs.testcases;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -50,6 +51,17 @@ public class CheckoutTest extends BaseTest {
 
 		String actualURL = driver.getCurrentUrl();
 		assertEquals(expectedCheckoutURL, actualURL, "Checkout Step One URL should match");
+	}
+
+	@Test
+	public void verifyCheckoutInfoFieldsPresence() {
+		homePage.clickAddToCartByProductName("Sauce Labs Backpack");
+		homePage.clickCart();
+		cartPage.clickCheckoutButton();
+
+		assertTrue(checkoutPage.firstName.isDisplayed(), "First Name field should be displayed");
+		assertTrue(checkoutPage.lastName.isDisplayed(), "Last Name field should be displayed");
+		assertTrue(checkoutPage.postalCode.isDisplayed(), "Postal Code field should be displayed");
 	}
 
 }
