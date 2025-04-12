@@ -1,7 +1,5 @@
 package com.swaglabs.pages;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -11,38 +9,39 @@ import com.swaglabs.utility.ConfigDataProvider;
 
 public class BaseTest {
 
-	/**
-	 * Global Variable
-	 */
-	public WebDriver driver;
-	public ConfigDataProvider config = new ConfigDataProvider();
-
-	public String baseURL;
-	public String browser;
+	protected WebDriver driver;
+	protected ConfigDataProvider config;
+	protected String baseURL;
+	protected String browser;
 
 	@BeforeClass
-	public void setup() {
+	public void setUp() {
+		// Initialize config provider
+		config = new ConfigDataProvider();
+
+		// Get values from config.properties
 		browser = config.getBrowser();
 		baseURL = config.getStagingUrl();
 
-		// Debugging Logs
-		System.out.println("Browser: " + browser);
-		System.out.println("URL: " + baseURL);
+		System.out.println("[INFO] Starting browser: " + browser);
+		System.out.println("[INFO] Navigating to URL: " + baseURL);
 
+		// Start browser session
 		driver = BrowserFactory.startApplication(driver, browser, baseURL);
 
 		if (driver != null) {
-			System.out.println("Driver initialized successfully.");
+			System.out.println("[INFO] WebDriver initialized successfully.");
 		} else {
-			System.out.println("Driver initialization failed.");
+			System.err.println("[ERROR] Failed to initialize WebDriver.");
+			throw new RuntimeException("WebDriver not initialized. Test aborted.");
 		}
 	}
 
-	@AfterMethod
 	@AfterClass
 	public void tearDown() {
 		if (driver != null) {
 			BrowserFactory.quitBrowser(driver);
+			System.out.println("[INFO] Browser closed successfully.");
 		}
 	}
 }

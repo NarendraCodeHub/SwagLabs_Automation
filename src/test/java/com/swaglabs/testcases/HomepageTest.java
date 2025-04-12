@@ -27,6 +27,13 @@ import com.swaglabs.pages.CartPage;
 import com.swaglabs.pages.HomePage;
 import com.swaglabs.pages.LoginPage;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+
+@Feature("Homepage Testing")
 public class HomepageTest extends BaseTest {
 	private static final Logger logger = LogManager.getLogger(HomepageTest.class);
 
@@ -54,6 +61,9 @@ public class HomepageTest extends BaseTest {
 		driver.manage().deleteAllCookies();
 	}
 
+	@Story("Homepage - Swag Labs")
+	@Severity(SeverityLevel.BLOCKER)
+	@Description("Verify user is redirected to the homepage after successful login")
 	@Test
 	public void isHomepageDisplayed() {
 		if (hp.isTitleHomePageDisplayed()) {
@@ -134,6 +144,9 @@ public class HomepageTest extends BaseTest {
 		Assert.assertFalse(!hp.isMenuVisible(), "Menu should be closed after clicking the Close button.");
 	}
 
+	@Story("Homepage - Swag Labs")
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Ensure product sorting functions correctly by selected criteria - Name (Z to A)")
 	@Test
 	public void verifyFilter_ZtoA() {
 
@@ -153,6 +166,9 @@ public class HomepageTest extends BaseTest {
 				"Products are not sorted correctly in Z to A order.");
 	}
 
+	@Story("Homepage - Swag Labs")
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Ensure product sorting functions correctly by selected criteria - Name (A to Z)")
 	@Test
 	public void verifyFilter_AtoZ() {
 
@@ -172,6 +188,9 @@ public class HomepageTest extends BaseTest {
 				"Products are not sorted correctly in A to Z order.");
 	}
 
+	@Story("Homepage - Swag Labs")
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Ensure product sorting functions correctly by selected criteria - Price (low to high)")
 	@Test
 	public void verifyFilter_LowToHigh() {
 
@@ -191,6 +210,9 @@ public class HomepageTest extends BaseTest {
 		Assert.assertEquals(actualPrices, expectedPrices, "Products are not sorted by price (low to high).");
 	}
 
+	@Story("Homepage - Swag Labs")
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Ensure product sorting functions correctly by selected criteria - Price (high to low)")
 	@Test
 	public void verifyFilter_HighToLow() {
 
