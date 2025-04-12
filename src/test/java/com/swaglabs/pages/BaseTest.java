@@ -1,5 +1,7 @@
 package com.swaglabs.pages;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -36,6 +38,7 @@ public class BaseTest {
 		}
 	}
 
+	@AfterMethod
 	@AfterClass
 	public void tearDown() {
 		if (driver != null) {

@@ -1,8 +1,6 @@
 package com.swaglabs.testcases;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -50,7 +48,7 @@ public class CheckoutTest extends BaseTest {
 		cartPage.clickCheckoutButton();
 
 		String actualURL = driver.getCurrentUrl();
-		assertEquals(actualURL, expectedCheckoutURL, "Checkout Step One URL should match");
+		Assert.assertEquals(actualURL, expectedCheckoutURL, "Checkout Step One URL should match");
 	}
 
 	@Test
@@ -59,9 +57,9 @@ public class CheckoutTest extends BaseTest {
 		homePage.clickCart();
 		cartPage.clickCheckoutButton();
 
-		assertTrue(checkoutPage.getFirstNameField().isDisplayed(), "First Name field should be displayed");
-		assertTrue(checkoutPage.getLastNameField().isDisplayed(), "Last Name field should be displayed");
-		assertTrue(checkoutPage.getPostalCodeField().isDisplayed(), "Postal Code field should be displayed");
+		Assert.assertTrue(checkoutPage.getFirstNameField().isDisplayed(), "First Name field should be displayed");
+		Assert.assertTrue(checkoutPage.getLastNameField().isDisplayed(), "Last Name field should be displayed");
+		Assert.assertTrue(checkoutPage.getPostalCodeField().isDisplayed(), "Postal Code field should be displayed");
 	}
 
 	@Test
@@ -71,15 +69,18 @@ public class CheckoutTest extends BaseTest {
 		cartPage.clickCheckoutButton();
 
 		checkoutPage.clickContinueButton();
-		assertTrue(checkoutPage.isErrorMessageFirstnameDisplayed(), "First name error message should be displayed");
+		Assert.assertTrue(checkoutPage.isErrorMessageFirstnameDisplayed(),
+				"First name error message should be displayed");
 		checkoutPage.enterFirstName("Narendra");
 
 		checkoutPage.clickContinueButton();
-		assertTrue(checkoutPage.isErrorMessageLastnameDisplayed(), "Last name error message should be displayed");
+		Assert.assertTrue(checkoutPage.isErrorMessageLastnameDisplayed(),
+				"Last name error message should be displayed");
 		checkoutPage.enterLastName("Kumar");
 
 		checkoutPage.clickContinueButton();
-		assertTrue(checkoutPage.isErrorMessagePostalcodeDisplayed(), "Postal code error message should be displayed");
+		Assert.assertTrue(checkoutPage.isErrorMessagePostalcodeDisplayed(),
+				"Postal code error message should be displayed");
 		checkoutPage.enterPostalCode("201301");
 
 		checkoutPage.clickContinueButton();
@@ -97,35 +98,12 @@ public class CheckoutTest extends BaseTest {
 
 		checkoutPage.clickContinueButton();
 
-		assertTrue(checkoutPage.isTitleCheckoutOverviewDisplayed(), "Checkout Overview should be displayed.");
+		Assert.assertTrue(checkoutPage.isTitleCheckoutOverviewDisplayed(), "Checkout Overview should be displayed.");
 	}
 
 	@Test(enabled = false)
 	public void verifyProductConsistencyCheckout() {
-		/*
-		 * String productName = "Sauce Labs Backpack";
-		 * 
-		 * // Step 1: Get product details from Home Page String expectedProductName =
-		 * homePage.getProductName(productName); String expectedProductPrice =
-		 * homePage.getProductPrice(productName);
-		 * 
-		 * // Step 2: Add to cart and navigate to checkout
-		 * homePage.clickAddToCartByProductName(productName); homePage.clickCart();
-		 * cartPage.clickCheckoutButton();
-		 * 
-		 * // Step 3: Enter checkout info checkoutPage.enterFirstName("Narendra");
-		 * checkoutPage.enterLastName("Kumar"); checkoutPage.enterPostalCode("201301");
-		 * checkoutPage.clickContinueButton();
-		 * 
-		 * // Step 4: Validate product name and price in Checkout Overview String
-		 * actualProductName = checkoutPage.getCheckoutItemNames(); String
-		 * actualProductPrice = checkoutPage.getItemPrice();
-		 * 
-		 * assertTrue(actualProductName.contains(expectedProductName),
-		 * "Product name should remain consistent throughout checkout");
-		 * assertEquals(actualProductPrice, expectedProductPrice,
-		 * "Product price should remain consistent throughout checkout");
-		 */
+		// This test is currently disabled (enabled = false)
 	}
 
 	@Test
@@ -139,26 +117,23 @@ public class CheckoutTest extends BaseTest {
 		checkoutPage.enterPostalCode("201301");
 		checkoutPage.clickContinueButton();
 
-		// Assertions for item summary details
-		assertTrue(checkoutPage.getCheckoutItemNames().contains("Sauce Labs Backpack"),
+		Assert.assertTrue(checkoutPage.getCheckoutItemNames().contains("Sauce Labs Backpack"),
 				"Item name should be displayed correctly");
-		assertEquals(checkoutPage.getCartQuantity(), "1", "Cart quantity should be 1");
-		assertTrue(checkoutPage.getItemPrice().startsWith("$"), "Item price should be displayed with $");
+		Assert.assertEquals(checkoutPage.getCartQuantity(), "1", "Cart quantity should be 1");
+		Assert.assertTrue(checkoutPage.getItemPrice().startsWith("$"), "Item price should be displayed with $");
 
-		// Subtotal, Payment Info, Shipping Info
-		assertTrue(checkoutPage.getItemSubtotal().startsWith("Item total: $"),
+		Assert.assertTrue(checkoutPage.getItemSubtotal().startsWith("Item total: $"),
 				"Item subtotal should start with 'Item total:'");
-		assertEquals(checkoutPage.getPaymentInformation(), "Payment Information:",
+		Assert.assertEquals(checkoutPage.getPaymentInformation(), "Payment Information:",
 				"Payment label should be 'Payment Information'");
-		assertTrue(checkoutPage.getPaymentInformationValue().length() > 0, "Payment value should not be empty");
+		Assert.assertTrue(checkoutPage.getPaymentInformationValue().length() > 0, "Payment value should not be empty");
 
-		assertEquals(checkoutPage.getShippingInformation(), "Shipping Information:",
+		Assert.assertEquals(checkoutPage.getShippingInformation(), "Shipping Information:",
 				"Shipping label should be 'Shipping Information'");
-		assertTrue(checkoutPage.getShippingInformationValue().length() > 0, "Shipping value should not be empty");
+		Assert.assertTrue(checkoutPage.getShippingInformationValue().length() > 0,
+				"Shipping value should not be empty");
 
-		// Tax and Total
-		assertTrue(checkoutPage.getTax().startsWith("Tax:"), "Tax label should start with 'Tax:'");
-		assertTrue(checkoutPage.getTotal().startsWith("Total:"), "Total label should start with 'Total:'");
+		Assert.assertTrue(checkoutPage.getTax().startsWith("Tax:"), "Tax label should start with 'Tax:'");
+		Assert.assertTrue(checkoutPage.getTotal().startsWith("Total:"), "Total label should start with 'Total:'");
 	}
-
 }

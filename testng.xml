@@ -3,9 +3,11 @@
 <suite name="Suite">
   <test thread-count="5" name="Test">
     <classes>
+      <class name="com.swaglabs.testcases.CartTest"/>
       <class name="com.swaglabs.testcases.LoginTest"/>
       <class name="com.swaglabs.pages.BaseTest"/>
       <class name="com.swaglabs.testcases.HomepageTest"/>
+      <class name="com.swaglabs.testcases.CheckoutTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
