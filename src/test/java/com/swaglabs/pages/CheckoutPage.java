@@ -62,7 +62,7 @@ public class CheckoutPage {
 	@FindBy(xpath = "//div[@class='summary_value_label' and @data-test='shipping-info-value']")
 	private WebElement ShippingInformationValue;
 
-	@FindBy(xpath = "//div[@class='summary_info_label' and @data-test='total-info-label']")
+	@FindBy(xpath = "//div[@class='summary_subtotal_label' and @data-test='subtotal-label']")
 	private WebElement itemSubtotal;
 
 	@FindBy(xpath = "//div[@class='summary_tax_label' and @data-test='tax-label']")
@@ -145,7 +145,7 @@ public class CheckoutPage {
 		return titleCheckoutOverview.isDisplayed();
 	}
 
-	public String getcartQuantity() {
+	public String getCartQuantity() {
 		return cartQuantity.getText();
 	}
 
@@ -157,7 +157,7 @@ public class CheckoutPage {
 		return itemNames;
 	}
 
-	public String getitemPrice() {
+	public String getItemPrice() {
 		return itemPrice.getText();
 	}
 
@@ -177,7 +177,7 @@ public class CheckoutPage {
 		return ShippingInformationValue.getText();
 	}
 
-	public String getitemSubtotal() {
+	public String getItemSubtotal() {
 		return itemSubtotal.getText();
 	}
 
