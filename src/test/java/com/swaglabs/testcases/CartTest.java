@@ -1,7 +1,5 @@
 package com.swaglabs.testcases;
 
-import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -44,7 +42,7 @@ public class CartTest extends BaseTest {
 		String cartURL = baseURL + "cart.html";
 		String CurrentURL = driver.getCurrentUrl();
 
-		AssertJUnit.assertEquals(cartURL, CurrentURL);
+		Assert.assertEquals(cartURL, CurrentURL);
 	}
 
 	@Test
@@ -52,7 +50,7 @@ public class CartTest extends BaseTest {
 		homePage.clickAddToCartByProductName("Sauce Labs Backpack");
 		homePage.clickCart();
 		String productName = homePage.getProductName();
-		AssertJUnit.assertEquals("Sauce Labs Backpack", productName);
+		Assert.assertEquals("Sauce Labs Backpack", productName);
 	}
 
 	@Test
@@ -67,9 +65,9 @@ public class CartTest extends BaseTest {
 		String productDescription = homePage.getProductDescription();
 		String productPrice = homePage.getProductPrice();
 
-		AssertJUnit.assertEquals(actualProductName, productName);
-		AssertJUnit.assertEquals(actualProductDesp, productDescription);
-		AssertJUnit.assertEquals(actualProductPrice, productPrice);
+		Assert.assertEquals(actualProductName, productName);
+		Assert.assertEquals(actualProductDesp, productDescription);
+		Assert.assertEquals(actualProductPrice, productPrice);
 
 	}
 
@@ -108,7 +106,7 @@ public class CartTest extends BaseTest {
 		homePage.clickCart();
 		cartPage.clickContinueShoppingButton();
 		String currentURL = driver.getCurrentUrl();
-		AssertJUnit.assertEquals(homePageURL, currentURL);
+		Assert.assertEquals(homePageURL, currentURL);
 	}
 
 	@Test
@@ -117,7 +115,7 @@ public class CartTest extends BaseTest {
 		homePage.clickCart();
 		cartPage.clickCheckoutButton();
 		String cartCurrentURL = driver.getCurrentUrl();
-		AssertJUnit.assertEquals(checkoutURL, cartCurrentURL);
+		Assert.assertEquals(checkoutURL, cartCurrentURL);
 	}
 
 }

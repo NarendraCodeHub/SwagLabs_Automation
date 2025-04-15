@@ -232,6 +232,9 @@ public class HomepageTest extends BaseTest {
 		Assert.assertEquals(actualPrices, expectedPrices, "Products are not sorted by Price (high to low).");
 	}
 
+	@Story("Homepage - Swag Labs")
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Ensure product isn't displayed , when no product added to cart.")
 	@Test
 	public void verifyCartWithoutProduct() {
 		hp.clickCart();
@@ -239,6 +242,9 @@ public class HomepageTest extends BaseTest {
 
 	}
 
+	@Story("Homepage - Swag Labs")
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Ensure when a product added , Cart Badge count should be increase.")
 	@Test
 	public void verifySingleProductCartBadgeCount() {
 		hp.clickAddToCartByProductName("Sauce Labs Backpack");
@@ -419,6 +425,9 @@ public class HomepageTest extends BaseTest {
 		Assert.assertTrue(isLoginVisible, "Login button is not visible. User might still be logged in.");
 	}
 
+	@Story("Homepage - Swag Labs")
+	@Severity(SeverityLevel.NORMAL)
+	@Description("Ensure All Social Media icon should be clickable or open in new tab.")
 	@Test
 	public void verifySocialLinkHomePage() {
 		String currentWindow = driver.getWindowHandle();
